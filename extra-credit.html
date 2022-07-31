@@ -99,23 +99,97 @@ html{
      </footer>
    </main>
   <script src="js/main.js"></script>
-  <script src="js/seasonal-styles.js"></script>
-  <script>
-	$("document").ready(function(){
-		$('#dateForm').submit(function(e){//handle form submission event
-            e.preventDefault();//stop default submission
-			var datetext = $('input[name=dateField]').val();//grab data from textbox
-			var formDate = new Date(datetext);//create a date from form input
-			var today = new Date();
-			
-			if(formDate > )
-			{
-				alert(datetext + " is in the future!");
-			}else{
-				alert(datetext + " is in the past!");
-			}
-		});
-	});
+  <script> 
+        function seasonalStyle(season) {
+            switch(season){
+            case "Spring":
+                $("html").css("background-color","#2B7129");
+                $("#wear").attr("src","images/spring-wear.jpg");
+                $("#logo").attr("src","images/spring.gif");
+                $("header h3").text("Jump into Spring Wear!");
+                break;
+            case "Summer":
+                $("html").css("background-color","#EBA52B");
+                $("#wear").attr("src","images/summer-wear.jpg");
+                $("#logo").attr("src","images/summer.gif");
+                $("header h3").text("Jump into Summer Wear!");
+                break;
+            case "Fall":
+                $("html").css("background-color","#A81124");
+                $("#wear").attr("src","images/fall-wear.jpg");
+                $("#logo").attr("src","images/fall.gif");
+                $("header h3").text("Jump into Fall Wear!");
+                break;
+            case "Winter":
+                $("html").css("background-color","#005393");
+                $("#wear").attr("src","images/winter-wear.jpg");
+                $("#logo").attr("src","images/winter.gif");
+                $("header h3").text("Leap into our Fall Wear!");
+                break;
+            default:
+                $("html").css("background-color","#FFC0CB");
+                $("#wear").attr("src","images/default-wear.jpg");
+                $("#logo").attr("src","images/four-seasons.gif");
+                $("header h3").text("Welcome to Eddie Browser!");
+                
+            }
+        }
+    $("document").ready(function(){
+    $('.seasons a').click(function(e){//find all a tags inside class of seasons
+        e.preventDefault();//stop default submission
+        var season = $(this).attr("href");//contents of href attribute of this element
+        seasonalStyle(season);
+    })
+})
+
+    $("document").ready(function(){
+            $('#dateForm').submit(function(e){//handle form submission event
+                e.preventDefault();//stop default submission
+                var datetext = $('input[name=dateField]').val();//grab data from textbox
+                var formDate = new Date(datetext);//create a date from form input
+                //var today = new Date();
+                formDate.setFullYear("2000");
+
+                let seasonalDuration = {
+                    Spring: [ new Date("March 01, 00"), new Date("May 31, 00") ],
+                    Summer: [ new Date("June 01, 00"), new Date("Augest 31, 00") ],
+                    Fall: [ new Date("September 01, 00"), new Date("November 30, 00") ],
+                    Winter: [ new Date("December 01, 99"), new Date("February 28, 00") ],				
+                };
+
+                var spring= seasonalDuration .Spring[0] <= formDate && formDate<= seasonalDuration .Spring[1];
+                var summer= seasonalDuration .Summer[0] <= formDate && formDate <= seasonalDuration .Summer[1];
+                var fall= seasonalDuration .Fall[0] <= formDate && formDate <= seasonalDuration .Fall[1];           
+                var winter= seasonalDuration .Winter[0] <= formDate && formDate <= seasonalDuration .Winter[1];
+                    
+                    switch ( true ) {
+                        case spring:
+                            seasonalStyle("Spring");
+                        break;
+                        case summer:
+                            seasonalStyle("Summer");
+                        break;
+                        case fall:
+                            seasonalStyle("Fall");
+                        break;
+                        case winter:
+                            seasonalStyle("Winter");
+                        break;
+
+                    };
+            
+		    });
+	    });          
+          
     </script>
-  </body>
+
+</body>
 </html>
+
+
+
+
+
+
+
+

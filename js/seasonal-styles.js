@@ -2,7 +2,7 @@ $("document").ready(function(){
     $('.seasons a').click(function(e){//find all a tags inside class of seasons
         e.preventDefault();//stop default submission
         var season = $(this).attr("href");//contents of href attribute of this element
-        alert(season);
+        //alert(season);
         switch(season){
             case "Spring":
                 $("html").css("background-color","#2B7129");
